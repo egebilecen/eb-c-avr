@@ -11,21 +11,22 @@
              SN74HC165
     SH/LD --|‾‾‾‾‾O‾‾‾‾‾|-- VCC
       CLK --|          |-- CLK INH
-        E --|          |-- D
-        F --|          |-- C
-        G --|          |-- B
-        H --|          |-- A
-      QHC --|          |-- SER
+        F --|          |-- E
+        G --|          |-- D
+        H --|          |-- C
+  (?) SER --|          |-- B
+      QHC --|          |-- A
       GND --|          |-- QH
              ‾‾‾‾‾‾‾‾‾‾‾
           _
     QHC = QH
+
+    sn74hc165_get_data() return value mapping:
+    abcdefgh
+    ||||||||
+    00000000
 */
 
-/*
-    Input pins and output pins must be in same port.
-    Example: PIND and PORTD.
-*/
 struct SN74HC165_REGISTER_PINS
 {
     volatile uint8_t* SH_LD_DDR;
