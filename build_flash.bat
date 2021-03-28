@@ -1,2 +1,2 @@
 @echo off
-make & call upload.bat
+make & call flash.bat
