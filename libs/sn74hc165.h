@@ -22,7 +22,7 @@
     QHC = QH
 
     sn74hc165_get_data() return value mapping:
-    abcdefgh
+    ABCDEFGH
     ||||||||
     00000000
 */
