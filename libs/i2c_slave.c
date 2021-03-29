@@ -3,12 +3,12 @@
 
 #include "i2c_slave.h"
 
-static void (*I2C_recv)(uint8_t);
+static void (*I2C_recv)(uint8_t, void*);
 static void (*I2C_req)(void*);
 
 static void* _global_var = 0x00;
 
-void I2C_setCallbacks(void (*recv)(uint8_t), void (*req)())
+void I2C_setCallbacks(void (*recv)(uint8_t, void*), void (*req)(void*))
 {
   I2C_recv = recv;
   I2C_req = req;
@@ -41,7 +41,7 @@ ISR(TWI_vect)
   {
     case TW_SR_DATA_ACK:
       // received data from master, call the receive callback
-      I2C_recv(TWDR); 
+      I2C_recv(TWDR, _global_var); 
       TWCR = (1<<TWIE) | (1<<TWINT) | (1<<TWEA) | (1<<TWEN);
       break;
     case TW_ST_SLA_ACK:

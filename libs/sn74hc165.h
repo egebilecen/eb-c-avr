@@ -27,6 +27,9 @@
     00000000
 */
 
+static uint8_t       _shift_register_count     = 1;
+static uint8_t const _max_shift_register_count = 4;
+
 struct SN74HC165_REGISTER_PINS
 {
     volatile uint8_t* SH_LD_DDR;
@@ -42,7 +45,15 @@ struct SN74HC165_REGISTER_PINS
     uint8_t           QH; // INPUT
 };
 
-void sn74hc165_init(struct SN74HC165_REGISTER_PINS* pins);
-uint8_t sn74hc165_get_data(struct SN74HC165_REGISTER_PINS* pins);
+struct SHIFT_REGISTER_DATA
+{
+  uint8_t sh_reg1;
+  uint8_t sh_reg2;
+  uint8_t sh_reg3;
+  uint8_t sh_reg4;
+};
+
+void sn74hc165_init(uint8_t shift_register_count, struct SN74HC165_REGISTER_PINS* pins);
+struct SHIFT_REGISTER_DATA sn74hc165_get_data(struct SN74HC165_REGISTER_PINS* pins, uint8_t bit_order);
 
 #endif
